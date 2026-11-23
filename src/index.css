@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    color-scheme: light;
+    font-family: 'Poppins', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
+    font-family: 'Montserrat', 'Poppins', sans-serif;
+  }
+
+  /* Custom smooth light scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f1f5f9;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+  }
+}
+
+/* ==========================================================================
+   CLEAN CRISP MODERN OCEANIC STYLES (NO HEAVY BOX SHADOWS)
+   ========================================================================== */
+
+/* Clean Card Surface */
+.clean-card {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1.5px solid rgba(224, 242, 254, 0.9);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+.clean-card-hover {
+  transition: all 0.25s ease;
+}
+.clean-card-hover:hover {
+  border-color: rgba(56, 189, 248, 0.7);
+  transform: translateY(-3px);
+}
+
+/* Clean Button */
+.clean-btn {
+  background: #ffffff;
+  border: 1.5px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  transition: all 0.2s ease;
+}
+.clean-btn:hover {
+  border-color: rgba(56, 189, 248, 0.7);
+  background: #f8fafc;
+  transform: translateY(-1px);
+}
+
+/* Clean Primary Button */
+.clean-btn-primary {
+  background: linear-gradient(135deg, #00d2ff 0%, #0284c7 100%);
+  border: 1px solid rgba(56, 189, 248, 0.5);
+  color: #03102b;
+  box-shadow: 0 1px 3px rgba(2, 132, 199, 0.15);
+  transition: all 0.2s ease;
+}
+.clean-btn-primary:hover {
+  background: linear-gradient(135deg, #38bdf8 0%, #0369a1 100%);
+  transform: translateY(-1px);
+}
+
+/* Clean Inset Well / Pill */
+.clean-pill {
+  background: #f0f9ff;
+  border: 1px solid rgba(186, 230, 253, 0.8);
+}
+
+/* Clean Dark Card Surface */
+.clean-dark-card {
+  background: #031338;
+  border: 1.5px solid rgba(0, 210, 255, 0.25);
+  box-shadow: none;
+}
+.clean-dark-card:hover {
+  border-color: rgba(0, 210, 255, 0.7);
+  transform: translateY(-3px);
+}
+
+/* Glass panel */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(224, 242, 254, 0.8);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.text-gradient-brand {
+  background: linear-gradient(135deg, #090d16 10%, #1e1b4b 60%, #4338ca 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-accent {
+  background: linear-gradient(135deg, #1e1b4b 0%, #4338ca 45%, #0284c7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, #92400e 0%, #b45309 60%, #d97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
