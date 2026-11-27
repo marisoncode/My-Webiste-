@@ -12,108 +12,156 @@
     font-family: 'Montserrat', 'Poppins', sans-serif;
   }
 
-  /* Custom smooth light scrollbar */
+  /* Custom smooth scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
   }
   ::-webkit-scrollbar-track {
-    background: #f1f5f9;
+    background: #f4f4f5;
+  }
+  .dark ::-webkit-scrollbar-track {
+    background: #18181b;
   }
   ::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
+    background: #d4d4d8;
     border-radius: 9999px;
   }
+  .dark ::-webkit-scrollbar-thumb {
+    background: #3f3f46;
+  }
   ::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
+    background: #0d9488;
   }
 }
 
 /* ==========================================================================
-   CLEAN CRISP MODERN OCEANIC STYLES (NO HEAVY BOX SHADOWS)
+   CLEAN CRISP MODERN STUDIO STYLES (NO DARK BLUES, NO BUTTON GRADIENTS)
    ========================================================================== */
 
 /* Clean Card Surface */
 .clean-card {
-  background: rgba(255, 255, 255, 0.96);
-  border: 1.5px solid rgba(224, 242, 254, 0.9);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  background: #ffffff;
+  border: 1px solid #e4e4e7;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 .clean-card-hover {
   transition: all 0.25s ease;
 }
 .clean-card-hover:hover {
-  border-color: rgba(56, 189, 248, 0.7);
+  border-color: #0d9488;
   transform: translateY(-3px);
 }
 
 /* Clean Button */
 .clean-btn {
   background: #ffffff;
-  border: 1.5px solid rgba(226, 232, 240, 0.9);
+  border: 1px solid #e4e4e7;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
   transition: all 0.2s ease;
 }
 .clean-btn:hover {
-  border-color: rgba(56, 189, 248, 0.7);
-  background: #f8fafc;
+  border-color: #0d9488;
+  background: #f4f4f5;
   transform: translateY(-1px);
 }
 
-/* Clean Primary Button */
+/* Clean Primary Button (Solid Teal, No Gradient) */
 .clean-btn-primary {
-  background: linear-gradient(135deg, #00d2ff 0%, #0284c7 100%);
-  border: 1px solid rgba(56, 189, 248, 0.5);
-  color: #03102b;
-  box-shadow: 0 1px 3px rgba(2, 132, 199, 0.15);
+  background: #0d9488;
+  border: 1px solid #0f766e;
+  color: #ffffff;
+  box-shadow: 0 1px 3px rgba(13, 148, 136, 0.2);
   transition: all 0.2s ease;
 }
 .clean-btn-primary:hover {
-  background: linear-gradient(135deg, #38bdf8 0%, #0369a1 100%);
+  background: #0f766e;
   transform: translateY(-1px);
 }
 
 /* Clean Inset Well / Pill */
 .clean-pill {
-  background: #f0f9ff;
-  border: 1px solid rgba(186, 230, 253, 0.8);
+  background: #f0fdfa;
+  border: 1px solid #99f6e4;
 }
 
-/* Clean Dark Card Surface */
+/* Clean Dark Card Surface (Neutral Charcoal, No Dark Blue) */
 .clean-dark-card {
-  background: #031338;
-  border: 1.5px solid rgba(0, 210, 255, 0.25);
+  background: #18181b;
+  border: 1px solid #27272a;
   box-shadow: none;
 }
 .clean-dark-card:hover {
-  border-color: rgba(0, 210, 255, 0.7);
+  border-color: #0d9488;
   transform: translateY(-3px);
 }
 
 /* Glass panel */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(224, 242, 254, 0.8);
+  border: 1px solid #e4e4e7;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 .text-gradient-brand {
-  background: linear-gradient(135deg, #090d16 10%, #1e1b4b 60%, #4338ca 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #18181b;
 }
 
 .text-gradient-accent {
-  background: linear-gradient(135deg, #1e1b4b 0%, #4338ca 45%, #0284c7 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #0d9488;
 }
 
 .text-gradient-gold {
-  background: linear-gradient(135deg, #92400e 0%, #b45309 60%, #d97706 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #b45309;
+}
+
+/* Corner-to-Corner Running Hover Border (Solid Teal, No Gradients) */
+.run-border-card {
+  position: relative;
+}
+.run-border-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.run-border-card:hover .run-border-svg {
+  opacity: 1;
+}
+.run-border-rect {
+  fill: none;
+  stroke: #0d9488;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 28 72;
+  stroke-dashoffset: 0;
+}
+.dark .run-border-rect {
+  stroke: #2dd4bf;
+}
+.run-border-card:hover .run-border-rect {
+  animation: runBorderLoop 1.5s linear infinite;
+}
+@keyframes runBorderLoop {
+  to {
+    stroke-dashoffset: -100;
+  }
+}
+
+/* Storm Thunder Flow Connector Surge */
+.thunder-surge {
+  stroke-dasharray: 18 82;
+  stroke-dashoffset: 100;
+  animation: thunderSurge 1.2s linear infinite;
+}
+@keyframes thunderSurge {
+  to {
+    stroke-dashoffset: 0;
+  }
 }

@@ -75,17 +75,6 @@ export default function TiltCard({
       <div style={{ transform: "translateZ(15px)" }} className="h-full w-full">
         {children}
       </div>
-
-      {/* Dynamic Specular Glare Reflection for Light Cards */}
-      {glare && (
-        <div
-          className="pointer-events-none absolute inset-0 rounded-[inherit] transition-opacity duration-300 z-30 overflow-hidden"
-          style={{
-            opacity: isHovered ? glarePos.opacity : 0,
-            background: `radial-gradient(circle 260px at ${glarePos.x}% ${glarePos.y}%, rgba(255,255,255,0.7), transparent 80%)`,
-          }}
-        />
-      )}
     </motion.div>
   );
 }

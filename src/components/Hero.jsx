@@ -6,25 +6,25 @@ import {
   MessageCircle,
   Play
 } from 'lucide-react';
-import CyberWhaleHero from './CyberWhaleHero';
+import HeroDesignSeoShowcase from './HeroDesignSeoShowcase';
 import MagneticButton from './MagneticButton';
 import { soundFx } from '../utils/soundEffects';
 
 export default function Hero({ onOpenQuote }) {
   return (
-    <section id="hero" className="relative min-h-[90vh] lg:min-h-[94vh] pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden bg-gradient-to-b from-[#e0f2fe]/80 via-[#f0f9ff]/90 to-[#f0f9ff] flex flex-col justify-center select-none">
+    <section id="hero" className="relative min-h-[90vh] lg:min-h-[94vh] pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden bg-[#fafaf9] dark:bg-zinc-950 flex flex-col justify-center select-none transition-colors duration-300">
       
-      {/* 1. Ambient Celestial Background Glows */}
-      <div className="absolute top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full bg-cyan-400/20 pointer-events-none z-0 blur-[130px]" />
-      <div className="absolute top-1/3 right-10 w-[650px] h-[650px] rounded-full bg-blue-500/15 pointer-events-none z-0 blur-[140px]" />
-      <div className="absolute bottom-10 right-1/4 w-[400px] h-[300px] rounded-full bg-cyan-300/20 pointer-events-none z-0 blur-[100px]" />
+      {/* 1. Ambient Studio Background Glows */}
+      <div className="absolute top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full bg-teal-400/10 pointer-events-none z-0 blur-[130px]" />
+      <div className="absolute top-1/3 right-10 w-[650px] h-[650px] rounded-full bg-emerald-400/10 pointer-events-none z-0 blur-[140px]" />
+      <div className="absolute bottom-10 right-1/4 w-[400px] h-[300px] rounded-full bg-teal-300/10 pointer-events-none z-0 blur-[100px]" />
 
-      {/* Floating Bioluminescent Water Bubbles Across Section */}
+      {/* Floating Ambient Bubbles Across Section */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-        <div className="absolute top-16 left-8 w-14 h-14 rounded-full border border-cyan-400/50 bg-cyan-400/15 backdrop-blur-xs animate-float-slow shadow-[0_0_20px_rgba(0,210,255,0.3)]" />
-        <div className="absolute top-44 right-12 w-20 h-20 rounded-full border border-blue-400/40 bg-blue-400/15 backdrop-blur-xs animate-float-delayed shadow-[0_0_25px_rgba(59,130,246,0.25)]" />
-        <div className="absolute bottom-24 left-1/3 w-10 h-10 rounded-full border border-cyan-300/60 bg-cyan-300/20 animate-float-slow shadow-sm" />
-        <div className="absolute top-1/4 right-1/3 w-7 h-7 rounded-full border border-cyan-400/70 bg-cyan-400/25 animate-bounce" />
+        <div className="absolute top-16 left-8 w-14 h-14 rounded-full border border-teal-400/40 bg-teal-400/10 backdrop-blur-xs animate-float-slow" />
+        <div className="absolute top-44 right-12 w-20 h-20 rounded-full border border-emerald-400/30 bg-emerald-400/10 backdrop-blur-xs animate-float-delayed" />
+        <div className="absolute bottom-24 left-1/3 w-10 h-10 rounded-full border border-teal-300/50 bg-teal-300/15 animate-float-slow shadow-sm" />
+        <div className="absolute top-1/4 right-1/3 w-7 h-7 rounded-full border border-teal-400/50 bg-teal-400/20 animate-bounce" />
       </div>
 
       {/* Wide Desktop Responsive Container - Eliminates empty margins on desktop */}
@@ -41,32 +41,32 @@ export default function Hero({ onOpenQuote }) {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/95 border border-cyan-300 hover:border-cyan-400 transition-all cursor-pointer group shadow-xs"
+              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-teal-400 transition-all cursor-pointer group shadow-xs"
               onClick={() => {
                 const el = document.getElementById('services');
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }}
               onMouseEnter={() => soundFx.playPop()}
             >
-              <span className="w-2.5 h-2.5 rounded-full bg-cyan-500 animate-pulse shadow-[0_0_8px_#00d2ff]" />
-              <span className="text-xs font-bold text-slate-800 tracking-wide font-sans">
-                Majestic Digital Studio ✦ Creative Agency
+              <span className="w-2.5 h-2.5 rounded-full bg-teal-500 animate-pulse" />
+              <span className="text-xs font-bold text-zinc-800 dark:text-zinc-200 tracking-wide font-sans">
+                MJ Web Design Studio ✦ Web Design & SEO
               </span>
-              <span className="inline-block px-3 py-0.5 text-[10px] uppercase font-black tracking-wider rounded-full bg-amber-50 text-amber-950 border border-amber-300">
+              <span className="inline-block px-3 py-0.5 text-[10px] uppercase font-black tracking-wider rounded-full bg-teal-50 dark:bg-teal-950 text-teal-800 dark:text-teal-300 border border-teal-200 dark:border-teal-800">
                 Starts at Rs 999
               </span>
             </motion.div>
 
-            {/* Massive Display Headline: Your Vision. Our Digital Canvas. */}
+            {/* Massive Display Headline */}
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-4xl sm:text-6xl lg:text-[4.2rem] xl:text-[4.8rem] font-black tracking-tight text-slate-950 leading-[1.08] font-display"
+              className="text-4xl sm:text-6xl lg:text-[4.2rem] xl:text-[4.8rem] font-black tracking-tight text-zinc-950 dark:text-white leading-[1.08] font-display"
             >
-              Your Vision. <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284c7] via-[#00d2ff] to-[#0ea5e9] drop-shadow-[0_2px_15px_rgba(0,210,255,0.3)]">
-                Our Digital Canvas.
+              Websites Built to <br />
+              <span className="text-teal-600 dark:text-teal-400">
+                Rank & Convert.
               </span>
             </motion.h1>
 
@@ -75,9 +75,9 @@ export default function Hero({ onOpenQuote }) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-base sm:text-lg md:text-xl text-slate-600 max-w-xl leading-relaxed font-normal"
+              className="text-base sm:text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-xl leading-relaxed font-normal"
             >
-              We design and develop extraordinary digital experiences that help businesses grow, stand out and succeed online. Crafted by Majestic Digital Studio starting at flat ₹999.
+              We craft fast, responsive websites, high-converting landing pages, and Google-ready SEO setups that turn visitors into paying customers — starting at flat ₹999.
             </motion.p>
 
             {/* Action Buttons */}
@@ -96,7 +96,7 @@ export default function Hero({ onOpenQuote }) {
                     if (el) el.scrollIntoView({ behavior: 'smooth' });
                   }}
                   onMouseEnter={() => soundFx.playPop()}
-                  className="px-8 py-3.5 rounded-full bg-gradient-to-r from-[#00d2ff] via-[#0ea5e9] to-[#0284c7] hover:from-[#38bdf8] hover:to-[#0369a1] text-slate-950 font-black text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2 group shadow-md shadow-cyan-500/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
+                  className="px-8 py-3.5 rounded-full bg-teal-600 hover:bg-teal-700 text-white font-black text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2 group shadow-sm hover:scale-[1.02] active:scale-[0.98] transition-all"
                 >
                   <span>Let's Build Something</span>
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -112,9 +112,9 @@ export default function Hero({ onOpenQuote }) {
                     if (el) el.scrollIntoView({ behavior: 'smooth' });
                   }}
                   onMouseEnter={() => soundFx.playPop()}
-                  className="px-7 py-3.5 rounded-full bg-white/95 hover:bg-white text-slate-900 font-bold text-xs sm:text-sm border-2 border-cyan-200 hover:border-cyan-400 shadow-xs transition-all flex items-center gap-2 group"
+                  className="px-7 py-3.5 rounded-full bg-white hover:bg-zinc-50 text-zinc-900 font-bold text-xs sm:text-sm border border-zinc-200 hover:border-teal-500 shadow-xs transition-all flex items-center gap-2 group"
                 >
-                  <Play className="w-3.5 h-3.5 fill-cyan-600 text-cyan-600 group-hover:scale-110 transition-transform" />
+                  <Play className="w-3.5 h-3.5 fill-teal-600 text-teal-600 group-hover:scale-110 transition-transform" />
                   <span>Explore Our Services</span>
                 </button>
               </MagneticButton>
@@ -149,13 +149,12 @@ export default function Hero({ onOpenQuote }) {
                 <span>Scroll to explore</span>
               </div>
 
-              {/* 3D Smiley Mascot Guarantee */}
+              {/* Guarantee Badge */}
               <div 
                 onClick={() => soundFx.playWaterSplash()}
-                className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/95 border border-amber-200 shadow-xs hover:scale-105 cursor-pointer group transition-all"
+                className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-xs hover:scale-105 cursor-pointer group transition-all"
               >
-                <span className="text-base">😊</span>
-                <span className="text-xs font-extrabold text-slate-900">
+                <span className="text-xs font-extrabold text-zinc-900 dark:text-zinc-100">
                   100% Happy Clients Guarantee
                 </span>
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
@@ -164,9 +163,9 @@ export default function Hero({ onOpenQuote }) {
 
           </div>
 
-          {/* Right Column (6 to 7 cols): The Majestic Side-View Movable Cyber Whale & Horizon Scene */}
-          <div className="lg:col-span-6 xl:col-span-7 relative flex items-center justify-center w-full min-h-[440px] sm:min-h-[520px] lg:min-h-[600px]">
-            <CyberWhaleHero />
+          {/* Right Column (6 to 7 cols): Interactive Website Design & SEO Showcase */}
+          <div className="lg:col-span-6 xl:col-span-7 relative flex items-center justify-center w-full">
+            <HeroDesignSeoShowcase />
           </div>
 
         </div>

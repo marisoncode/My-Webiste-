@@ -1,84 +1,115 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { agencyStats } from '../data/testimonialsData';
-import { Award, ShieldCheck, Zap, Users } from 'lucide-react';
-import AnimatedCounter from './AnimatedCounter';
+import {
+  Palette,
+  Zap,
+  Search,
+  Smartphone,
+  MapPin,
+  MessageCircle,
+  Layout,
+  Rocket
+} from 'lucide-react';
+import RunningBorder from './RunningBorder';
+
+const TECH_CAPABILITIES = [
+  {
+    title: 'Website Design',
+    tag: 'Custom UI',
+    desc: 'Clean, modern websites crafted for your brand.',
+    metric: 'Bespoke Look',
+    icon: Palette
+  },
+  {
+    title: 'Google Business Profile',
+    tag: 'Google Maps',
+    desc: 'Complete setup so local customers find and call you.',
+    metric: 'Maps Verified',
+    icon: MapPin
+  },
+  {
+    title: 'Google SEO Setup',
+    tag: 'Search Rank',
+    desc: 'Clean headings, meta tags, and search indexing.',
+    metric: 'SEO Ready',
+    icon: Search
+  },
+  {
+    title: 'Mobile-Friendly',
+    tag: 'Responsive',
+    desc: 'Looks sharp across phones, tablets, and desktops.',
+    metric: 'All Screens',
+    icon: Smartphone
+  },
+  {
+    title: 'Fast Page Speed',
+    tag: 'Performance',
+    desc: 'Lightweight pages that open smoothly on mobile.',
+    metric: '0.6s Load',
+    icon: Zap
+  },
+  {
+    title: 'Direct WhatsApp',
+    tag: 'Lead Flow',
+    desc: '1-click inquiry routing straight to your WhatsApp.',
+    metric: 'Instant Chat',
+    icon: MessageCircle
+  },
+  {
+    title: 'Landing Pages',
+    tag: 'Conversion',
+    desc: 'Focused pages built to turn visitors into leads.',
+    metric: '48-72h Launch',
+    icon: Rocket
+  },
+  {
+    title: 'Clean Layouts',
+    tag: 'Typography',
+    desc: 'Clear spacing and readable sections on every device.',
+    metric: 'Light & Dark',
+    icon: Layout
+  }
+];
 
 export default function SocialProofMarquee() {
-  const techStack = [
-    { name: "React.js", icon: "⚛️" },
-    { name: "Tailwind CSS", icon: "🎨" },
-    { name: "Framer Motion", icon: "✨" },
-    { name: "Next.js", icon: "▲" },
-    { name: "TypeScript", icon: "🔷" },
-    { name: "Figma UI/UX", icon: "🎯" },
-    { name: "Shopify Headless", icon: "🛍️" },
-    { name: "Stripe Checkout", icon: "💳" },
-    { name: "Technical SEO", icon: "📈" },
-    { name: "Web Vitals 95+", icon: "⚡" }
-  ];
-
-  const statIcons = [Award, Users, Zap, ShieldCheck];
-
   return (
-    <section className="py-12 bg-slate-50/70 border-y border-slate-200/80 relative overflow-hidden">
-      <div className="max-w-[1536px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-20 mb-10">
-        {/* Four metric boxes */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-          {agencyStats.map((stat, idx) => {
-            const Icon = statIcons[idx % statIcons.length];
+    <section className="py-10 md:py-12 bg-zinc-50 dark:bg-zinc-900 border-y border-zinc-200/80 dark:border-zinc-800 relative overflow-hidden select-none transition-colors duration-300">
+      <div className="w-full overflow-hidden">
+        <div
+          className="flex gap-6 w-max animate-marquee hover:[animation-play-state:paused]"
+          style={{ animationDuration: '18s' }}
+        >
+          {[...TECH_CAPABILITIES, ...TECH_CAPABILITIES].map((item, idx) => {
+            const Icon = item.icon;
             return (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: idx * 0.1 }}
-                className="p-6 sm:p-7 rounded-3xl bg-white border-2 border-slate-200/90 hover:border-cyan-400 shadow-xs hover:shadow-md transition-all duration-300 group cursor-pointer"
+              <div
+                key={`${item.title}-${idx}`}
+                className="run-border-card w-60 h-60 shrink-0 p-5 rounded-2xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 shadow-xs transition-colors flex flex-col justify-between group"
               >
-                <div className="flex items-center gap-3.5 mb-2.5">
-                  <div className="w-11 h-11 rounded-2xl bg-cyan-50 border border-cyan-200 text-cyan-700 group-hover:scale-105 flex items-center justify-center transition-all duration-200">
+                <RunningBorder />
+                <div className="flex items-center justify-between">
+                  <div className="w-10 h-10 rounded-xl bg-teal-50 dark:bg-teal-950 border border-teal-200 dark:border-teal-800 text-teal-700 dark:text-teal-400 flex items-center justify-center">
                     <Icon className="w-5 h-5" />
                   </div>
-                  <span className="text-2xl sm:text-3xl font-black text-slate-950 font-display">
-                    {stat.rawNum !== undefined ? (
-                      <AnimatedCounter 
-                        value={stat.rawNum} 
-                        prefix={stat.prefix || ""} 
-                        suffix={stat.suffix || ""} 
-                      />
-                    ) : (
-                      stat.value
-                    )}
+                  <span className="px-2.5 py-1 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-[10px] font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-300">
+                    {item.tag}
                   </span>
                 </div>
-                <div className="text-sm font-bold text-slate-900">
-                  {stat.label}
+
+                <div>
+                  <h4 className="text-base font-black text-zinc-950 dark:text-white font-display mb-1.5 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
+                    {item.title}
+                  </h4>
+                  <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed line-clamp-2">
+                    {item.desc}
+                  </p>
                 </div>
-                <div className="text-xs text-slate-500 font-medium mt-0.5">
-                  {stat.subtext}
+
+                <div className="pt-3 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between text-xs font-bold">
+                  <span className="text-teal-700 dark:text-teal-400">{item.metric}</span>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
-        </div>
-      </div>
-
-      {/* Ticker marquee */}
-      <div className="relative w-full overflow-hidden flex items-center">
-        <div className="absolute left-0 inset-y-0 w-24 bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 inset-y-0 w-24 bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none" />
-
-        <div className="flex gap-8 whitespace-nowrap animate-marquee py-2">
-          {[...techStack, ...techStack, ...techStack].map((item, i) => (
-            <div
-              key={i}
-              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-xl bg-white border border-slate-200/80 text-slate-700 text-xs font-semibold tracking-wide shadow-sm"
-            >
-              <span>{item.icon}</span>
-              <span>{item.name}</span>
-            </div>
-          ))}
         </div>
       </div>
     </section>

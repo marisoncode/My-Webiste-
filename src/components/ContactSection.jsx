@@ -99,16 +99,16 @@ export default function ContactSection({
   );
 
   return (
-    <section id="contact" className="py-24 md:py-32 relative bg-gradient-to-b from-[#f0f9ff] via-[#e0f2fe]/50 to-[#03102b] overflow-hidden select-none">
+    <section id="contact" className="py-24 md:py-32 relative bg-zinc-50 dark:bg-zinc-900 border-t border-zinc-200/80 dark:border-zinc-800 overflow-hidden select-none transition-colors duration-300">
       
-      {/* Ambient Celestial Light & Floating Water Bubbles from the image */}
-      <div className="absolute top-10 left-12 w-16 h-16 rounded-full border border-cyan-400/50 bg-cyan-400/15 backdrop-blur-xs animate-float-slow shadow-[0_0_20px_rgba(0,210,255,0.3)] pointer-events-none" />
-      <div className="absolute bottom-20 right-10 w-24 h-24 rounded-full border border-blue-400/40 bg-blue-400/15 backdrop-blur-xs animate-float-delayed shadow-[0_0_25px_rgba(59,130,246,0.25)] pointer-events-none" />
-      <div className="absolute top-1/3 right-1/4 w-10 h-10 rounded-full border border-cyan-300/60 bg-cyan-300/20 animate-float-slow pointer-events-none" />
+      {/* Subtle Ambient Floating Bubbles */}
+      <div className="absolute top-10 left-12 w-16 h-16 rounded-full border border-teal-400/30 bg-teal-400/10 backdrop-blur-xs animate-float-slow pointer-events-none" />
+      <div className="absolute bottom-20 right-10 w-24 h-24 rounded-full border border-teal-400/30 bg-teal-400/10 backdrop-blur-xs animate-float-delayed pointer-events-none" />
+      <div className="absolute top-1/3 right-1/4 w-10 h-10 rounded-full border border-teal-300/40 bg-teal-300/15 animate-float-slow pointer-events-none" />
 
       <div className="max-w-[1536px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-20 relative z-10">
         
-        {/* 3-Column / Dual-Column Layout with Launching Rocket matching the image */}
+        {/* 3-Column Layout with Launching Rocket */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* Left Column (4 cols): Headline, Subtitle & WhatsApp CTA */}
@@ -117,9 +117,9 @@ export default function ContactSection({
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/95 border border-cyan-200 text-cyan-900 text-xs font-bold uppercase tracking-wider shadow-xs"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-zinc-200 text-teal-800 text-xs font-bold uppercase tracking-wider shadow-xs"
             >
-              <Sparkles className="w-3.5 h-3.5 text-cyan-600" />
+              <Sparkles className="w-3.5 h-3.5 text-teal-600" />
               Contact Us
             </motion.div>
 
@@ -128,10 +128,10 @@ export default function ContactSection({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-950 tracking-tight leading-[1.12] font-display"
+              className="text-3xl sm:text-4xl md:text-5xl font-black text-zinc-950 dark:text-white tracking-tight leading-[1.12] font-display"
             >
               Have an Idea? <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 via-sky-500 to-blue-600">
+              <span className="text-teal-600 dark:text-teal-400">
                 Let's Make It Happen.
               </span>
             </motion.h2>
@@ -141,12 +141,12 @@ export default function ContactSection({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="text-base text-slate-600 leading-relaxed font-normal"
+              className="text-base text-zinc-600 dark:text-zinc-400 leading-relaxed font-normal"
             >
-              Get in touch with MJ Digital Studio for your next project or consultation. Handcrafted starting at just ₹999.
+              Get in touch with MJ Web Design Studio for your next project or consultation. Handcrafted starting at just ₹999.
             </motion.p>
 
-            {/* Direct WhatsApp Action Button from the image */}
+            {/* Direct WhatsApp Action Button (Solid Teal, No Gradient) */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -159,22 +159,22 @@ export default function ContactSection({
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => soundFx.playWaterSplash()}
-                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg shadow-cyan-500/25 hover:scale-105 active:scale-95 transition-all group"
+                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-teal-600 hover:bg-teal-700 text-white font-black text-xs uppercase tracking-wider shadow-sm hover:scale-105 active:scale-95 transition-all group"
               >
-                <MessageCircle className="w-4 h-4 text-slate-950" />
+                <MessageCircle className="w-4 h-4 text-white" />
                 <span>Chat With Us on WhatsApp</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </a>
 
-              <div className="mt-3 text-xs text-slate-500 font-medium">
-                Or fill out the form • WhatsApp: <strong className="text-slate-800">{FORMATTED_PHONE}</strong>
+              <div className="mt-3 text-xs text-zinc-500 font-medium">
+                Or fill out the form • WhatsApp: <strong className="text-zinc-800">{FORMATTED_PHONE}</strong>
               </div>
             </motion.div>
           </div>
 
-          {/* Center Column (5 cols): Frosted Glass Form matching the image */}
+          {/* Center Column (5 cols): Clean White/Dark Form Card */}
           <div className="lg:col-span-5 relative">
-            <div className="rounded-3xl bg-white/95 border-2 border-cyan-100/90 hover:border-cyan-400 p-6 sm:p-8 shadow-2xl shadow-cyan-900/10 backdrop-blur-xl transition-all duration-300">
+            <div className="rounded-2xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 hover:border-teal-500 p-6 sm:p-8 shadow-sm transition-all duration-300">
               {submitted ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
@@ -188,7 +188,7 @@ export default function ContactSection({
                     Message Sent!
                   </h3>
                   <p className="text-sm text-slate-600 leading-relaxed">
-                    Thank you! MJ Digital Studio will reply to <span className="font-bold text-cyan-700">{formData.email}</span> within 2 hours.
+                    Thank you! MJ Web Design Studio will reply to <span className="font-bold text-cyan-700">{formData.email}</span> within 2 hours.
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}
@@ -266,11 +266,11 @@ export default function ContactSection({
                     />
                   </div>
 
-                  {/* Submit Button: Send Message -> */}
+                  {/* Submit Button: Send Message -> (Solid, No Gradient) */}
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full py-3.5 rounded-full bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg shadow-cyan-500/25 flex items-center justify-center gap-2 group transition-all duration-200 active:scale-98"
+                    className="w-full py-3.5 rounded-full bg-zinc-900 hover:bg-teal-600 text-white font-black text-xs uppercase tracking-wider shadow-sm flex items-center justify-center gap-2 group transition-all duration-200 active:scale-98"
                   >
                     {loading ? (
                       <span>Sending...</span>

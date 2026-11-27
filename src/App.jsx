@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import AboutSection from './components/AboutSection';
@@ -11,14 +11,85 @@ import TestimonialsSection from './components/TestimonialsSection';
 import FaqSection from './components/FaqSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
-import AmbientSpotlight from './components/AmbientSpotlight';
-import WaterDropCursor from './components/WaterDropCursor';
 import SectionTransition from './components/SectionTransition';
+import ScrollToTopRing from './components/ScrollToTopRing';
+import QuickCommandPalette from './components/QuickCommandPalette';
+import StormThunderOverlay from './components/StormThunderOverlay';
 import { MessageCircle } from 'lucide-react';
 import { soundFx } from './utils/soundEffects';
 
 export default function App() {
   const [prefilledService, setPrefilledService] = useState('');
+  const [paletteOpen, setPaletteOpen] = useState(false);
+  const [scrollTopPct, setScrollTopPct] = useState(0);
+  const [darkMode, setDarkMode] = useState(() => {
+    try {
+      return localStorage.getItem('mj_theme') === 'dark';
+    } catch {
+      return false;
+    }
+  });
+  const [currentPage, setCurrentPage] = useState(() =>
+    window.location.hash === '#/faq' || window.location.pathname === '/faq' ? 'faq' : 'home'
+  );
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', darkMode);
+    document.documentElement.style.colorScheme = darkMode ? 'dark' : 'light';
+    try {
+      localStorage.setItem('mj_theme', darkMode ? 'dark' : 'light');
+    } catch {
+      // ignore storage errors
+    }
+  }, [darkMode]);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollTopPct(docHeight > 0 ? Math.min(100, Math.max(0, (window.scrollY / docHeight) * 100)) : 0);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    const syncRoute = () => {
+      const isFaq = window.location.hash === '#/faq' || window.location.pathname === '/faq';
+      setCurrentPage(isFaq ? 'faq' : 'home');
+    };
+    window.addEventListener('hashchange', syncRoute);
+    window.addEventListener('popstate', syncRoute);
+    return () => {
+      window.removeEventListener('hashchange', syncRoute);
+      window.removeEventListener('popstate', syncRoute);
+    };
+  }, []);
+
+  const navigateTo = (page, sectionId) => {
+    if (page === '__open_palette__') {
+      setPaletteOpen(true);
+      return;
+    }
+    if (page === 'faq') {
+      window.location.hash = '#/faq';
+      setCurrentPage('faq');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    if (window.location.hash === '#/faq') {
+      window.history.pushState(null, '', window.location.pathname || '/');
+    }
+    setCurrentPage('home');
+    if (sectionId) {
+      setTimeout(() => {
+        const el = document.querySelector(sectionId);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 60);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   // User's provided WhatsApp number
   const WHATSAPP_NUMBER = "917305431802";
@@ -32,87 +103,106 @@ export default function App() {
   );
 
   return (
-    <div className="min-h-screen bg-[#fafbfc] text-slate-900 flex flex-col font-sans selection:bg-cyan-500 selection:text-slate-950 relative cursor-default">
-      {/* 1. Fluid Water Droplet Cursor with Liquid Ripples & 3D Emojis */}
-      <WaterDropCursor />
+    <div className="min-h-screen bg-[#fafaf9] dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 flex flex-col font-sans selection:bg-teal-600 selection:text-white relative transition-colors duration-300">
+      {/* Top Scroll Progress Bar */}
+      <div className="fixed top-0 left-0 right-0 h-[3px] z-50 pointer-events-none bg-transparent">
+        <div
+          className="h-full bg-teal-600 transition-[width] duration-100 ease-out"
+          style={{ width: `${scrollTopPct}%` }}
+        />
+      </div>
 
-      {/* 2. Soft Ambient Cursor Spotlight */}
-      <AmbientSpotlight glowColor="rgba(0, 210, 255, 0.08)" />
+      {/* Site-Wide Storm Thunder & Lightning Effect */}
+      <StormThunderOverlay />
 
-      {/* 3. Floating Island Dock Navbar */}
-      <Navbar onOpenQuote={() => {
-        soundFx.playWaterSplash();
-        const el = document.getElementById('contact');
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }} />
-
-      {/* Main High-Impact Stratified Oceanic Sections matching the master image */}
-      <main className="flex-1 relative z-10 pt-2">
-        {/* Layer 1: Hero Section (Your Vision. Our Digital Canvas.) */}
-        <Hero onOpenQuote={() => {
+      {/* 1. Floating Island Dock Navbar */}
+      <Navbar
+        darkMode={darkMode}
+        onToggleDark={() => setDarkMode((d) => !d)}
+        onOpenPalette={() => setPaletteOpen(true)}
+        onNavigate={navigateTo}
+        onOpenQuote={() => {
           soundFx.playWaterSplash();
-          const el = document.getElementById('contact');
-          if (el) el.scrollIntoView({ behavior: 'smooth' });
-        }} />
+          navigateTo('home', '#contact');
+        }}
+      />
 
-        {/* Oceanic Wave Transition: Celestial Ocean to Cloud Foam Layer */}
-        <OceanicWave mode="toLight" />
+      {/* Quick Command Palette (Ctrl+K) */}
+      <QuickCommandPalette
+        isOpen={paletteOpen}
+        onClose={() => setPaletteOpen(false)}
+        darkMode={darkMode}
+        onToggleDark={() => setDarkMode((d) => !d)}
+        onNavigate={navigateTo}
+      />
 
-        {/* Layer 2: About MJ Digital Studio (More Than Just Websites with 3D Glass MJ Card & Stats) */}
-        <SectionTransition id="about-wrap">
-          <AboutSection />
-        </SectionTransition>
+      {currentPage === 'faq' ? (
+        <main className="flex-1 relative z-10 pt-2">
+          <FaqSection
+            onBackHome={() => navigateTo('home')}
+            onContact={() => navigateTo('home', '#contact')}
+          />
+        </main>
+      ) : (
+        <main className="flex-1 relative z-10 pt-2">
+          {/* Layer 1: Hero Section */}
+          <Hero onOpenQuote={() => {
+            soundFx.playWaterSplash();
+            navigateTo('home', '#contact');
+          }} />
 
-        {/* Layer 3: Social Proof & Metrics Marquee */}
-        <SectionTransition>
-          <SocialProofMarquee />
-        </SectionTransition>
+          <OceanicWave mode="toLight" />
 
-        {/* Layer 4: "Our Expertise" - 8 Unique Services Grid (E-commerce removed) */}
-        <SectionTransition id="services-wrap">
-          <ServicesSection onSelectService={handleSelectService} />
-        </SectionTransition>
+          {/* Layer 2: About MJ Digital Studio */}
+          <SectionTransition id="about-wrap">
+            <AboutSection />
+          </SectionTransition>
 
-        {/* Oceanic Wave Transition: Light Layer to Deep Midnight Oceanic Ribbon */}
-        <OceanicWave mode="toDark" />
+          {/* Layer 3: Tech Stack Marquee */}
+          <SectionTransition>
+            <SocialProofMarquee />
+          </SectionTransition>
 
-        {/* Layer 5: "Why Choose MJ Digital Studio?" (Digital Solutions Designed to Make an Impact) */}
-        <SectionTransition id="why-us-wrap">
-          <WhyChooseUs />
-        </SectionTransition>
+          {/* Layer 4: "Our Expertise" - 4 Core Services */}
+          <SectionTransition id="services-wrap">
+            <ServicesSection onSelectService={handleSelectService} />
+          </SectionTransition>
 
-        {/* Oceanic Wave Transition: Deep Ocean Ribbon to Light Layer */}
-        <OceanicWave mode="toLight" />
+          <OceanicWave mode="toDark" />
 
-        {/* Layer 6: "Our Process" (From First Idea to Final Launch) */}
-        <SectionTransition id="process-wrap">
-          <ProcessSection />
-        </SectionTransition>
+          {/* Layer 5: "Why Choose MJ Digital Studio?" */}
+          <SectionTransition id="why-us-wrap">
+            <WhyChooseUs />
+          </SectionTransition>
 
-        {/* Oceanic Wave Transition: Light Layer to Deep Midnight Testimonial Wave */}
-        <OceanicWave mode="toDark" />
+          <OceanicWave mode="toLight" />
 
-        {/* Layer 7: "Good Words. Great Partnerships." (Verified Client Reviews) */}
-        <SectionTransition id="testimonials-wrap">
-          <TestimonialsSection />
-        </SectionTransition>
+          {/* Layer 6: "Our Process" */}
+          <SectionTransition id="process-wrap">
+            <ProcessSection />
+          </SectionTransition>
 
-        {/* Oceanic Wave Transition: Deep Ocean Wave to Light Layer */}
-        <OceanicWave mode="toLight" />
+          <OceanicWave mode="toDark" />
 
-        {/* Layer 8: Frequently Asked Questions */}
-        <SectionTransition id="faq-wrap">
-          <FaqSection />
-        </SectionTransition>
+          {/* Layer 7: "Good Words. Great Partnerships." */}
+          <SectionTransition id="testimonials-wrap">
+            <TestimonialsSection />
+          </SectionTransition>
 
-        {/* Layer 9: "Have an Idea? Let's Make It Happen." (Contact Hub with Rocket) */}
-        <SectionTransition id="contact-wrap">
-          <ContactSection prefilledService={prefilledService} />
-        </SectionTransition>
-      </main>
+          <OceanicWave mode="toLight" />
 
-      {/* Layer 10: Monumental Deep Oceanic Architectural Footer */}
-      <Footer />
+          {/* Layer 8: "Have an Idea? Let's Make It Happen." */}
+          <SectionTransition id="contact-wrap">
+            <ContactSection prefilledService={prefilledService} />
+          </SectionTransition>
+        </main>
+      )}
+
+      {/* Architectural Footer */}
+      <Footer onNavigate={navigateTo} />
+
+      {/* Circular Scroll-Progress Back-to-Top Button (Bottom-Left) */}
+      <ScrollToTopRing />
 
       {/* Floating 1-Click WhatsApp Action Pill (Bottom-Right) */}
       <aside className="fixed bottom-6 right-6 z-40 group">

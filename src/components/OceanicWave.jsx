@@ -15,68 +15,46 @@ export default function OceanicWave({
 }) {
   const isToLight = mode === 'toLight';
 
-  // Fill colors: deep ocean #03102b vs light cloud #f0f9ff / #ffffff
-  const primaryFill = isToLight ? '#f0f9ff' : '#03102b';
-  const secondaryFill = isToLight ? 'rgba(224, 242, 254, 0.5)' : 'rgba(7, 26, 64, 0.6)';
-
   return (
     <div className={`w-full overflow-hidden leading-none relative z-20 pointer-events-none select-none ${className}`}>
       <svg
-        className="relative block w-full h-12 sm:h-16 md:h-24"
-        viewBox="0 0 1440 120"
+        className="relative block w-full h-16 sm:h-24 md:h-28"
+        viewBox="0 0 1440 130"
         preserveAspectRatio="none"
       >
-        <defs>
-          {/* Bioluminescent Gradient Glow for Wave Crest */}
-          <linearGradient id="waveGlowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.2" />
-            <stop offset="30%" stopColor="#00d2ff" stopOpacity="0.9" />
-            <stop offset="70%" stopColor="#38bdf8" stopOpacity="1" />
-            <stop offset="100%" stopColor="#0284c7" stopOpacity="0.3" />
-          </linearGradient>
-
-          <filter id="waveNeonGlow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="3" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-        </defs>
-
         {/* Layer 1: Ambient Depth Wave Behind */}
         <path
           d={
             isToLight
-              ? "M0,45 C280,110 520,10 820,70 C1120,120 1340,30 1440,55 L1440,120 L0,120 Z"
-              : "M0,35 C320,95 640,0 960,65 C1200,110 1360,25 1440,45 L1440,120 L0,120 Z"
+              ? "M0,38 C190,118 360,-10 560,58 C760,122 950,-5 1150,62 C1300,112 1385,28 1440,52 L1440,130 L0,130 Z"
+              : "M0,42 C210,115 390,-5 590,62 C790,125 970,0 1170,68 C1310,114 1390,32 1440,58 L1440,130 L0,130 Z"
           }
-          fill={secondaryFill}
+          className={isToLight ? 'fill-zinc-100/80 dark:fill-zinc-900/70' : 'fill-zinc-200/60 dark:fill-zinc-800/60'}
         />
 
-        {/* Layer 2: Main Solid Wave */}
+        {/* Layer 2: Main Deep Curved Wave */}
         <path
           d={
             isToLight
-              ? "M0,60 C320,120 600,20 900,80 C1180,130 1360,40 1440,70 L1440,120 L0,120 Z"
-              : "M0,50 C360,110 720,15 1040,75 C1240,115 1380,35 1440,60 L1440,120 L0,120 Z"
+              ? "M0,58 C180,128 340,2 540,70 C740,130 920,6 1120,74 C1280,122 1380,40 1440,66 L1440,130 L0,130 Z"
+              : "M0,52 C190,124 360,0 560,68 C760,128 940,4 1140,72 C1295,120 1385,36 1440,62 L1440,130 L0,130 Z"
           }
-          fill={primaryFill}
+          className={isToLight ? 'fill-white dark:fill-zinc-950' : 'fill-zinc-100 dark:fill-zinc-900'}
         />
 
-        {/* Layer 3: Bioluminescent Glowing Energy Ribbon Crest */}
+        {/* Layer 3: Solid Teal Wavy Crest Line */}
         {hasGlow && (
           <path
             d={
               isToLight
-                ? "M0,60 C320,120 600,20 900,80 C1180,130 1360,40 1440,70"
-                : "M0,50 C360,110 720,15 1040,75 C1240,115 1380,35 1440,60"
+                ? "M0,58 C180,128 340,2 540,70 C740,130 920,6 1120,74 C1280,122 1380,40 1440,66"
+                : "M0,52 C190,124 360,0 560,68 C760,128 940,4 1140,72 C1295,120 1385,36 1440,62"
             }
             fill="none"
-            stroke="url(#waveGlowGrad)"
-            strokeWidth="3.5"
+            stroke="#0d9488"
+            strokeOpacity="0.45"
+            strokeWidth="3"
             strokeLinecap="round"
-            filter="url(#waveNeonGlow)"
           />
         )}
       </svg>
