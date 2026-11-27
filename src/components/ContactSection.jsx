@@ -2,27 +2,35 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { 
-  Send, 
   MessageCircle, 
   Sparkles, 
   ArrowRight,
-  CheckCircle2
+  CheckCircle2,
+  MapPin
 } from 'lucide-react';
-import LaunchingRocket from './LaunchingRocket';
 import { soundFx } from '../utils/soundEffects';
 
 export default function ContactSection({ 
   prefilledService, 
   prefilledScope, 
-  prefilledPackage 
+  prefilledPackage,
+  siteMode = 'studio'
 }) {
+  const isAcademy = siteMode === 'academy';
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     businessName: '',
-    service: 'Website Design',
+    service: isAcademy ? 'Frontend & JavaScript' : 'Website Design',
     description: ''
   });
+
+  useEffect(() => {
+    setFormData(prev => ({
+      ...prev,
+      service: isAcademy ? 'Frontend & JavaScript' : 'Website Design'
+    }));
+  }, [isAcademy]);
 
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -82,117 +90,122 @@ export default function ContactSection({
     }, 800);
   };
 
-  // E-commerce removed as requested by user!
-  const servicesList = [
-    "Website Design",
-    "Web Development",
-    "Responsive Web Design",
-    "UI/UX & Interactive Design",
-    "SEO Optimization",
-    "Website Redesign",
-    "Landing Page Development",
-    "Website Maintenance & Speed Tuning"
-  ];
+  const servicesList = isAcademy
+    ? [
+        "Frontend & JavaScript",
+        "React & MERN Stack",
+        "Python Programming",
+        "Generative AI"
+      ]
+    : [
+        "Website Design",
+        "Landing Page",
+        "SEO Optimization",
+        "Google Business Profile"
+      ];
 
   const whatsappMessage = encodeURIComponent(
-    `Hello MJ Digital Studio! I'm interested in discussing a website project for ${formData.businessName || 'my brand'}. Service: ${formData.service}. Let's build something extraordinary!`
+    isAcademy
+      ? `Hello Hello World Studio! I'm interested in joining the ${formData.service} online coding class.`
+      : `Hello Hello World Studio! I'm interested in discussing a website project for ${formData.businessName || 'my brand'}. Service: ${formData.service}. Let's build something extraordinary!`
   );
 
   return (
-    <section id="contact" className="py-24 md:py-32 relative bg-zinc-50 dark:bg-zinc-900 border-t border-zinc-200/80 dark:border-zinc-800 overflow-hidden select-none transition-colors duration-300">
+    <section id="contact" className="py-10 sm:py-14 md:py-16 relative bg-zinc-50 dark:bg-zinc-900 border-t border-zinc-200/80 dark:border-zinc-800 overflow-hidden select-none transition-colors duration-300">
       
-      {/* Subtle Ambient Floating Bubbles */}
-      <div className="absolute top-10 left-12 w-16 h-16 rounded-full border border-teal-400/30 bg-teal-400/10 backdrop-blur-xs animate-float-slow pointer-events-none" />
-      <div className="absolute bottom-20 right-10 w-24 h-24 rounded-full border border-teal-400/30 bg-teal-400/10 backdrop-blur-xs animate-float-delayed pointer-events-none" />
-      <div className="absolute top-1/3 right-1/4 w-10 h-10 rounded-full border border-teal-300/40 bg-teal-300/15 animate-float-slow pointer-events-none" />
+      {/* Subtle Ambient Floating Bubbles (Desktop only) */}
+      <div className="hidden md:block absolute top-10 left-12 w-16 h-16 rounded-full border border-teal-400/30 bg-teal-400/10 backdrop-blur-xs animate-float-slow pointer-events-none" />
+      <div className="hidden md:block absolute bottom-20 right-10 w-24 h-24 rounded-full border border-teal-400/30 bg-teal-400/10 backdrop-blur-xs animate-float-delayed pointer-events-none" />
 
-      <div className="max-w-[1536px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-20 relative z-10">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-10 lg:px-14 xl:px-20 relative z-10">
         
-        {/* 3-Column Layout with Launching Rocket */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          
-          {/* Left Column (4 cols): Headline, Subtitle & WhatsApp CTA */}
-          <div className="lg:col-span-4 text-left space-y-5">
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-zinc-200 text-teal-800 text-xs font-bold uppercase tracking-wider shadow-xs"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-teal-600" />
-              Contact Us
-            </motion.div>
+        {/* Centered Header */}
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14 space-y-4">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-[#07292B] dark:text-[#25A727] text-xs font-bold uppercase tracking-wider shadow-xs"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-[#25A727]" />
+            Contact Us
+          </motion.div>
 
-            <motion.h2
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="text-3xl sm:text-4xl md:text-5xl font-black text-zinc-950 dark:text-white tracking-tight leading-[1.12] font-display"
-            >
-              Have an Idea? <br />
-              <span className="text-teal-600 dark:text-teal-400">
-                Let's Make It Happen.
-              </span>
-            </motion.h2>
+          <motion.h2
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-3xl sm:text-4xl md:text-5xl font-black text-zinc-950 dark:text-white tracking-tight leading-[1.12] font-display"
+          >
+            Have an Idea? <br />
+            <span className="text-[#19A12B]">
+              Let's Make It Happen.
+            </span>
+          </motion.h2>
 
-            <motion.p
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="text-base text-zinc-600 dark:text-zinc-400 leading-relaxed font-normal"
-            >
-              Get in touch with MJ Web Design Studio for your next project or consultation. Handcrafted starting at just ₹999.
-            </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed font-normal"
+          >
+            {isAcademy
+              ? 'Enquire about upcoming live online batches for Frontend, JavaScript, Python, React, MERN Stack, and Gen AI.'
+              : 'Get in touch with Hello World Studio for your next website, SEO, or Google Business Profile project.'}
+          </motion.p>
 
-            {/* Direct WhatsApp Action Button (Solid Teal, No Gradient) */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-              className="pt-2"
+          <div className="pt-1 flex justify-center">
+            <a
+              href={`https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => soundFx.playWaterSplash()}
+              className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-[#25A727] hover:bg-[#19A12B] text-white font-black text-xs uppercase tracking-wider shadow-sm hover:scale-105 active:scale-95 transition-all group"
             >
-              <a
-                href={`https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => soundFx.playWaterSplash()}
-                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-teal-600 hover:bg-teal-700 text-white font-black text-xs uppercase tracking-wider shadow-sm hover:scale-105 active:scale-95 transition-all group"
-              >
-                <MessageCircle className="w-4 h-4 text-white" />
-                <span>Chat With Us on WhatsApp</span>
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </a>
-
-              <div className="mt-3 text-xs text-zinc-500 font-medium">
-                Or fill out the form • WhatsApp: <strong className="text-zinc-800">{FORMATTED_PHONE}</strong>
-              </div>
-            </motion.div>
+              <MessageCircle className="w-4 h-4 text-white" />
+              <span>Chat With Us on WhatsApp</span>
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </a>
           </div>
+        </div>
 
-          {/* Center Column (5 cols): Clean White/Dark Form Card */}
-          <div className="lg:col-span-5 relative">
-            <div className="rounded-2xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 hover:border-teal-500 p-6 sm:p-8 shadow-sm transition-all duration-300">
+        {/* 2-Column Split: Left = Contact Form, Right = Google Map Location */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+          
+          {/* Left Side (6 cols): Contact Form */}
+          <div className="lg:col-span-6 flex flex-col">
+            <div className="h-full rounded-2xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 hover:border-[#25A727] overflow-hidden shadow-sm transition-all duration-300 flex flex-col">
+              {/* Matching Card Header Bar */}
+              <div className="px-6 py-3.5 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between gap-2">
+                <span className="text-xs sm:text-sm font-bold text-[#07292B] dark:text-white">
+                  {isAcademy ? 'Course Admission Enquiry' : 'Project Enquiry'}
+                </span>
+                <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-teal-50 dark:bg-[#07292B] text-[#19A12B] dark:text-[#25A727] border border-teal-200 dark:border-[#0d4a4c]">
+                  Replies in 2 hrs
+                </span>
+              </div>
+
+              <div className="p-6 sm:p-8 flex-1 flex flex-col justify-center">
               {submitted ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   className="text-center py-10 space-y-4"
                 >
-                  <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 mx-auto flex items-center justify-center shadow-inner">
+                  <div className="w-16 h-16 rounded-full bg-teal-50 dark:bg-[#07292B] text-[#25A727] mx-auto flex items-center justify-center">
                     <CheckCircle2 className="w-10 h-10" />
                   </div>
-                  <h3 className="text-2xl font-black text-slate-950 font-display">
+                  <h3 className="text-2xl font-black text-zinc-950 dark:text-white font-display">
                     Message Sent!
                   </h3>
-                  <p className="text-sm text-slate-600 leading-relaxed">
-                    Thank you! MJ Web Design Studio will reply to <span className="font-bold text-cyan-700">{formData.email}</span> within 2 hours.
+                  <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                    Thank you! Hello World Studio will reply to <span className="font-bold text-[#25A727]">{formData.email}</span> within 2 hours.
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}
-                    className="px-6 py-2.5 rounded-full bg-slate-950 text-white text-xs font-bold uppercase tracking-wider hover:bg-slate-800 transition-colors"
+                    className="px-6 py-2.5 rounded-full bg-[#07292B] hover:bg-[#25A727] text-white text-xs font-bold uppercase tracking-wider transition-colors"
                   >
                     Send Another
                   </button>
@@ -200,49 +213,61 @@ export default function ContactSection({
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   {/* Row 1: Your Name & Your Email */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
+                      <label className="block text-[11px] font-bold uppercase tracking-wider text-[#07292B] dark:text-zinc-300 mb-1.5">
+                        Your Name *
+                      </label>
                       <input
                         type="text"
                         name="name"
                         required
-                        placeholder="Your Name *"
+                        placeholder="e.g. Karthik"
                         value={formData.name}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-xs focus:outline-none focus:border-cyan-500 focus:bg-white transition-all shadow-inner"
+                        className="w-full px-4 py-3 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-950 dark:text-white placeholder-zinc-400 text-sm focus:outline-none focus:border-[#25A727] focus:ring-2 focus:ring-[#25A727]/20 focus:bg-white dark:focus:bg-zinc-950 transition-all"
                       />
                     </div>
                     <div>
+                      <label className="block text-[11px] font-bold uppercase tracking-wider text-[#07292B] dark:text-zinc-300 mb-1.5">
+                        Your Email *
+                      </label>
                       <input
                         type="email"
                         name="email"
                         required
-                        placeholder="Your Email *"
+                        placeholder="you@example.com"
                         value={formData.email}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-xs focus:outline-none focus:border-cyan-500 focus:bg-white transition-all shadow-inner"
+                        className="w-full px-4 py-3 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-950 dark:text-white placeholder-zinc-400 text-sm focus:outline-none focus:border-[#25A727] focus:ring-2 focus:ring-[#25A727]/20 focus:bg-white dark:focus:bg-zinc-950 transition-all"
                       />
                     </div>
                   </div>
 
                   {/* Row 2: Your Business Name & Select Service */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
+                      <label className="block text-[11px] font-bold uppercase tracking-wider text-[#07292B] dark:text-zinc-300 mb-1.5">
+                        {isAcademy ? 'Preferred Batch' : 'Business Name'}
+                      </label>
                       <input
                         type="text"
                         name="businessName"
-                        placeholder="Your Business Name"
+                        placeholder={isAcademy ? 'Weekday / Weekend' : 'Your Shop / Brand'}
                         value={formData.businessName}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-xs focus:outline-none focus:border-cyan-500 focus:bg-white transition-all shadow-inner"
+                        className="w-full px-4 py-3 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-950 dark:text-white placeholder-zinc-400 text-sm focus:outline-none focus:border-[#25A727] focus:ring-2 focus:ring-[#25A727]/20 focus:bg-white dark:focus:bg-zinc-950 transition-all"
                       />
                     </div>
                     <div>
+                      <label className="block text-[11px] font-bold uppercase tracking-wider text-[#07292B] dark:text-zinc-300 mb-1.5">
+                        {isAcademy ? 'Select Course' : 'Service Needed'}
+                      </label>
                       <select
                         name="service"
                         value={formData.service}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-slate-900 text-xs focus:outline-none focus:border-cyan-500 focus:bg-white transition-all shadow-inner cursor-pointer"
+                        className="w-full px-4 py-3 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-950 dark:text-white text-sm focus:outline-none focus:border-[#25A727] focus:ring-2 focus:ring-[#25A727]/20 focus:bg-white dark:focus:bg-zinc-950 transition-all cursor-pointer"
                       >
                         {servicesList.map((srv, i) => (
                           <option key={i} value={srv}>
@@ -255,22 +280,25 @@ export default function ContactSection({
 
                   {/* Row 3: Tell us about your project... */}
                   <div>
+                    <label className="block text-[11px] font-bold uppercase tracking-wider text-[#07292B] dark:text-zinc-300 mb-1.5">
+                      Project Details *
+                    </label>
                     <textarea
                       name="description"
                       rows={3}
                       required
-                      placeholder="Tell us about your project..."
+                      placeholder="Tell us what you want to build..."
                       value={formData.description}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-xs focus:outline-none focus:border-cyan-500 focus:bg-white transition-all resize-none shadow-inner"
+                      className="w-full px-4 py-3 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-950 dark:text-white placeholder-zinc-400 text-sm focus:outline-none focus:border-[#25A727] focus:ring-2 focus:ring-[#25A727]/20 focus:bg-white dark:focus:bg-zinc-950 transition-all resize-none"
                     />
                   </div>
 
-                  {/* Submit Button: Send Message -> (Solid, No Gradient) */}
+                  {/* Submit Button */}
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full py-3.5 rounded-full bg-zinc-900 hover:bg-teal-600 text-white font-black text-xs uppercase tracking-wider shadow-sm flex items-center justify-center gap-2 group transition-all duration-200 active:scale-98"
+                    className="w-full py-3.5 rounded-full bg-[#07292B] hover:bg-[#25A727] text-white font-black text-xs sm:text-sm uppercase tracking-wider shadow-sm flex items-center justify-center gap-2 group transition-all duration-200 active:scale-98"
                   >
                     {loading ? (
                       <span>Sending...</span>
@@ -283,12 +311,38 @@ export default function ContactSection({
                   </button>
                 </form>
               )}
+              </div>
             </div>
           </div>
 
-          {/* Right Column (3 cols): Spectacular 3D Launching Rocket from the image */}
-          <div className="lg:col-span-3 flex items-center justify-center">
-            <LaunchingRocket />
+          {/* Right Side (6 cols): Google Map Location */}
+          <div className="lg:col-span-6 flex flex-col">
+            <div className="h-full rounded-2xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 hover:border-[#25A727] overflow-hidden shadow-sm transition-all duration-300 flex flex-col">
+              <div className="px-5 py-3.5 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2 text-xs sm:text-sm font-bold text-[#07292B] dark:text-white">
+                  <MapPin className="w-4 h-4 text-[#25A727] shrink-0" />
+                  <span>Hello World Studio • Location</span>
+                </div>
+                <a
+                  href="https://www.google.com/maps?q=12.03294690852925,79.84921239899458"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[11px] font-bold text-[#25A727] hover:underline"
+                >
+                  Open in Maps →
+                </a>
+              </div>
+              <div className="flex-1 min-h-[320px] sm:min-h-[380px]">
+                <iframe
+                  src="https://maps.google.com/maps?q=12.03294690852925,79.84921239899458&z=16&output=embed"
+                  title="Hello World Studio Location Map"
+                  className="w-full h-full min-h-[320px] sm:min-h-[380px] border-0"
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                />
+              </div>
+            </div>
           </div>
 
         </div>

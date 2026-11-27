@@ -8,6 +8,15 @@
     font-family: 'Poppins', system-ui, sans-serif;
   }
 
+  section[id] {
+    scroll-margin-top: 5.5rem;
+  }
+  @media (min-width: 640px) {
+    section[id] {
+      scroll-margin-top: 6.5rem;
+    }
+  }
+
   h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
     font-family: 'Montserrat', 'Poppins', sans-serif;
   }
@@ -31,7 +40,7 @@
     background: #3f3f46;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #0d9488;
+    background: #25A727;
   }
 }
 
@@ -50,7 +59,7 @@
   transition: all 0.25s ease;
 }
 .clean-card-hover:hover {
-  border-color: #0d9488;
+  border-color: #25A727;
   transform: translateY(-3px);
 }
 
@@ -69,14 +78,14 @@
 
 /* Clean Primary Button (Solid Teal, No Gradient) */
 .clean-btn-primary {
-  background: #0d9488;
-  border: 1px solid #0f766e;
+  background: #25A727;
+  border: 1px solid #07292B;
   color: #ffffff;
-  box-shadow: 0 1px 3px rgba(13, 148, 136, 0.2);
+  box-shadow: 0 1px 3px rgba(37, 167, 39, 0.25);
   transition: all 0.2s ease;
 }
 .clean-btn-primary:hover {
-  background: #0f766e;
+  background: #07292B;
   transform: translateY(-1px);
 }
 
@@ -136,14 +145,14 @@
 }
 .run-border-rect {
   fill: none;
-  stroke: #0d9488;
+  stroke: #25A727;
   stroke-width: 2.5;
   stroke-linecap: round;
   stroke-dasharray: 28 72;
   stroke-dashoffset: 0;
 }
 .dark .run-border-rect {
-  stroke: #2dd4bf;
+  stroke: #3ec740;
 }
 .run-border-card:hover .run-border-rect {
   animation: runBorderLoop 1.5s linear infinite;

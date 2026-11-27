@@ -30,7 +30,8 @@ const DEVICES = [
   { id: 'desktop', label: 'Desktop', widthClass: 'w-full', badge: '1440px', icon: Monitor }
 ];
 
-export default function HeroDesignSeoShowcase() {
+export default function HeroDesignSeoShowcase({ siteMode = 'studio' }) {
+  const isAcademy = siteMode === 'academy';
   const [activeTab, setActiveTab] = useState('design');
   const [swatchIdx, setSwatchIdx] = useState(0);
   const [deviceIdx, setDeviceIdx] = useState(2); // starts on desktop
@@ -90,7 +91,7 @@ export default function HeroDesignSeoShowcase() {
 
   return (
     <div
-      className="w-full max-w-[540px] mx-auto py-8 px-4 sm:px-6 select-none"
+      className="w-full max-w-[640px] mx-auto lg:ml-auto lg:mr-0 py-2 sm:py-4 select-none"
       style={{ perspective: 1200 }}
     >
       <motion.div
@@ -106,7 +107,7 @@ export default function HeroDesignSeoShowcase() {
           rotateY,
           transformStyle: 'preserve-3d'
         }}
-        className="relative w-full min-h-[430px] sm:min-h-0 sm:aspect-square cursor-pointer group"
+        className="relative w-full min-h-[370px] sm:min-h-0 sm:aspect-square cursor-pointer group"
       >
         {/* Back 3D Depth Plate (Offset in Z-space) */}
         <div
@@ -142,7 +143,7 @@ export default function HeroDesignSeoShowcase() {
                 }`}
               >
                 <Palette className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" />
-                <span>UI Design</span>
+                <span>{isAcademy ? 'Frontend & MERN' : 'UI Design'}</span>
               </button>
               <button
                 type="button"
@@ -157,7 +158,7 @@ export default function HeroDesignSeoShowcase() {
                 }`}
               >
                 <Search className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" />
-                <span>SEO & Speed</span>
+                <span>{isAcademy ? 'Python & Gen AI' : 'SEO & Speed'}</span>
               </button>
             </div>
           </div>
@@ -239,33 +240,35 @@ export default function HeroDesignSeoShowcase() {
 
                       <div className="space-y-1.5 sm:space-y-2 my-auto">
                         <div className="text-sm sm:text-lg font-black text-zinc-950 dark:text-white font-display leading-tight">
-                          Crafted to <span className={swatch.text}>Convert</span> Visitors.
+                          {isAcademy ? (
+                            <>Code Live. <span className={swatch.text}>Build Apps</span> Step-by-Step.</>
+                          ) : (
+                            <>Crafted to <span className={swatch.text}>Convert</span> Visitors.</>
+                          )}
                         </div>
                         <p className="text-[11px] sm:text-sm text-zinc-700 dark:text-zinc-300 leading-snug font-medium">
-                          Bespoke React UI + mobile-first layout engineered for instant trust.
+                          {isAcademy
+                            ? 'HTML, CSS, JavaScript, React & MERN Stack taught live online.'
+                            : 'Bespoke React UI + mobile-first layout engineered for instant trust.'}
                         </p>
                         <div className="pt-1 flex flex-wrap items-center gap-1.5 sm:gap-2">
                           <span className={`px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-bold text-white whitespace-nowrap ${swatch.bg}`}>
-                            Get Started
+                            {isAcademy ? 'Join Live Batch' : 'Get Started'}
                           </span>
                           <span className="px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-bold text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 whitespace-nowrap">
-                            View Work
+                            {isAcademy ? 'View Syllabus' : 'View Work'}
                           </span>
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-3 gap-1.5 sm:gap-2 pt-2 border-t border-zinc-200 dark:border-zinc-800 mt-2">
-                        <div className="p-1 sm:p-1.5 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200/70 dark:border-zinc-800 text-center">
-                          <div className="text-[11px] sm:text-xs font-black text-zinc-950 dark:text-white">0.6s</div>
-                          <div className="text-[9px] sm:text-[10px] font-semibold text-zinc-600 dark:text-zinc-400">Load</div>
+                      <div className="grid grid-cols-2 gap-2 pt-2 border-t border-zinc-200 dark:border-zinc-800 mt-2">
+                        <div className="p-1.5 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200/70 dark:border-zinc-800 text-center">
+                          <div className="text-[11px] sm:text-xs font-black text-zinc-950 dark:text-white">{isAcademy ? '100%' : '0.6s'}</div>
+                          <div className="text-[9px] sm:text-[10px] font-semibold text-zinc-600 dark:text-zinc-400">{isAcademy ? 'Live Online' : 'Fast Load'}</div>
                         </div>
-                        <div className="p-1 sm:p-1.5 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200/70 dark:border-zinc-800 text-center">
-                          <div className="text-[11px] sm:text-xs font-black text-zinc-950 dark:text-white">100%</div>
-                          <div className="text-[9px] sm:text-[10px] font-semibold text-zinc-600 dark:text-zinc-400">Mobile</div>
-                        </div>
-                        <div className="p-1 sm:p-1.5 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200/70 dark:border-zinc-800 text-center">
-                          <div className="text-[11px] sm:text-xs font-black text-zinc-950 dark:text-white">₹999</div>
-                          <div className="text-[9px] sm:text-[10px] font-semibold text-zinc-600 dark:text-zinc-400">Starts</div>
+                        <div className="p-1.5 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200/70 dark:border-zinc-800 text-center">
+                          <div className="text-[11px] sm:text-xs font-black text-zinc-950 dark:text-white">{isAcademy ? '1-on-1' : '100%'}</div>
+                          <div className="text-[9px] sm:text-[10px] font-semibold text-zinc-600 dark:text-zinc-400">{isAcademy ? 'Doubt Clear' : 'Mobile Ready'}</div>
                         </div>
                       </div>
                     </div>
@@ -284,13 +287,13 @@ export default function HeroDesignSeoShowcase() {
                   <div className="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1.5">
                     <div className="flex items-center gap-2 text-xs text-zinc-600 dark:text-zinc-400 font-medium">
                       <Globe className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" />
-                      <span>https://mjdigitalstudio.com</span>
+                      <span>https://helloworldstudio.in</span>
                       <span className="ml-auto px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 font-bold text-[10px]">
                         #1 Rank Ready
                       </span>
                     </div>
-                    <div className="text-sm sm:text-base font-bold text-teal-700 dark:text-teal-400 leading-snug">
-                      MJ Web Design Studio | Custom Web Design & SEO (Starts at ₹999)
+                    <div className="text-sm sm:text-base font-bold text-[#07292B] dark:text-[#25A727] leading-snug">
+                      Hello World Studio | Custom Web Design & SEO
                     </div>
                     <p className="text-xs text-zinc-700 dark:text-zinc-300 leading-relaxed font-medium">
                       Fast, responsive React websites & high-converting landing pages engineered for Google Search rankings.

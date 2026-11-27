@@ -41,26 +41,33 @@ export default function Footer({ onNavigate }) {
   };
 
   return (
-    <footer className="relative bg-zinc-950 text-white overflow-hidden pt-16 sm:pt-20 pb-12 select-none border-t border-zinc-800">
+    <footer className="relative bg-[#07292B] text-white overflow-hidden pt-12 sm:pt-16 pb-8 sm:pb-12 select-none border-t border-[#0d4a4c]">
       
-      {/* Subtle Neutral Studio Ambient Glows */}
-      <div className="absolute top-0 left-1/4 w-[600px] h-[400px] rounded-full bg-teal-500/10 blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-[700px] h-[500px] rounded-full bg-emerald-500/10 blur-[150px] pointer-events-none" />
+      {/* Subtle Brand Ambient Glows */}
+      <div className="hidden sm:block absolute top-0 left-1/4 w-[600px] h-[400px] rounded-full bg-[#25A727]/10 blur-[140px] pointer-events-none" />
+      <div className="hidden sm:block absolute bottom-0 right-1/4 w-[700px] h-[500px] rounded-full bg-[#25A727]/10 blur-[150px] pointer-events-none" />
 
-      <div className="max-w-[1536px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-20 relative z-10">
+      <div className="max-w-[1536px] mx-auto px-4 sm:px-10 lg:px-14 xl:px-20 relative z-10">
 
         {/* 4-Column Architectural Grid - Fully Responsive across Mobile, Tablet & Desktop */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 sm:gap-12 lg:gap-8 pb-16 border-b border-zinc-800">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-8 pb-10 sm:pb-14 border-b border-[#0d4a4c]">
           
           {/* Column 1 (4 cols): Brand Logo, Tagline, Description & Social Icons */}
           <div className="sm:col-span-2 lg:col-span-4 space-y-6">
-            <div className="flex flex-col text-left">
-              <span className="text-2xl sm:text-3xl font-black tracking-tight text-white font-display leading-tight">
-                MJ Web Design Studio
-              </span>
-              <span className="text-xs sm:text-sm font-bold text-teal-400 tracking-wider mt-1">
-                Design. Develop. Grow.
-              </span>
+            <div className="flex items-center gap-4 text-left">
+              <img
+                src="/helloworld-icon.png"
+                alt="Hello World Studio Logo"
+                className="h-16 sm:h-20 w-auto rounded-2xl object-contain bg-white p-1.5 shrink-0"
+              />
+              <div className="flex flex-col">
+                <span className="text-2xl sm:text-3xl font-black tracking-tight text-white font-display leading-tight">
+                  Hello World Studio
+                </span>
+                <span className="text-xs sm:text-sm font-bold text-[#25A727] tracking-wider mt-1">
+                  Learn it. Build it. Launch it.
+                </span>
+              </div>
             </div>
 
             <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal max-w-sm">
@@ -130,54 +137,42 @@ export default function Footer({ onNavigate }) {
             <ul className="space-y-3 text-sm sm:text-base text-slate-300 font-medium">
               <li>
                 <a 
-                  href="#hero" 
+                  href="#" 
                   onClick={(e) => {
                     e.preventDefault();
                     soundFx.playClick();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    if (onNavigate) onNavigate('home');
+                    else window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
-                  className="hover:text-cyan-300 transition-colors inline-block py-1"
+                  className="hover:text-[#25A727] transition-colors inline-block py-1"
                 >
                   Home
                 </a>
               </li>
               <li>
                 <a 
-                  href="#about" 
+                  href="#/studio" 
                   onClick={(e) => {
                     e.preventDefault();
                     soundFx.playClick();
-                    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+                    if (onNavigate) onNavigate('studio');
                   }}
-                  className="hover:text-cyan-300 transition-colors inline-block py-1"
+                  className="hover:text-[#25A727] transition-colors inline-block py-1"
                 >
-                  About
+                  Web Studio
                 </a>
               </li>
               <li>
                 <a 
-                  href="#why-us" 
+                  href="#/academy" 
                   onClick={(e) => {
                     e.preventDefault();
                     soundFx.playClick();
-                    document.getElementById('why-us')?.scrollIntoView({ behavior: 'smooth' });
+                    if (onNavigate) onNavigate('academy');
                   }}
-                  className="hover:text-cyan-300 transition-colors inline-block py-1"
+                  className="hover:text-[#25A727] transition-colors inline-block py-1"
                 >
-                  Why Us
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="#process" 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    soundFx.playClick();
-                    document.getElementById('process')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                  className="hover:text-cyan-300 transition-colors inline-block py-1"
-                >
-                  Process
+                  Online Academy
                 </a>
               </li>
               <li>
@@ -292,21 +287,21 @@ export default function Footer({ onNavigate }) {
             <h4 className="text-sm sm:text-base font-black uppercase tracking-wider text-white font-display">
               Get in Touch
             </h4>
-            <ul className="space-y-3 text-sm sm:text-base text-slate-200 font-medium">
+            <ul className="space-y-3 text-sm text-zinc-200 font-medium">
               <li className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-cyan-400 shrink-0" />
-                <a href="mailto:hello@mjdigitalstudio.com" className="hover:text-cyan-300 transition-colors">
-                  hello@mjdigitalstudio.com
+                <Mail className="w-4 h-4 text-[#25A727] shrink-0" />
+                <a href="mailto:helloworldstudiacademy@gmail.com" className="text-xs sm:text-sm hover:text-[#25A727] transition-colors whitespace-nowrap">
+                  helloworldstudiocademy@gmail.com
                 </a>
               </li>
               <li className="flex items-center gap-2.5">
-                <PhoneCall className="w-4 h-4 text-emerald-400 shrink-0" />
-                <a href="https://wa.me/917305431802" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-300 transition-colors font-bold text-emerald-400">
+                <PhoneCall className="w-4 h-4 text-[#25A727] shrink-0" />
+                <a href="https://wa.me/917305431802" target="_blank" rel="noopener noreferrer" className="hover:text-[#25A727] transition-colors font-bold text-[#25A727]">
                   +91 73054 31802
                 </a>
               </li>
               <li className="flex items-center gap-2.5">
-                <MapPin className="w-4 h-4 text-cyan-400 shrink-0" />
+                <MapPin className="w-4 h-4 text-[#25A727] shrink-0" />
                 <span>Puducherry, India</span>
               </li>
             </ul>
@@ -345,7 +340,7 @@ export default function Footer({ onNavigate }) {
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-slate-400 font-medium">
           <div>
-            © 2026 MJ Web Design Studio. All rights reserved. Handcrafted with React.
+            © 2026 Hello World Studio. All rights reserved. Handcrafted with React.
           </div>
 
           <div className="flex items-center gap-6">

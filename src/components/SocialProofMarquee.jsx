@@ -70,20 +70,67 @@ const TECH_CAPABILITIES = [
   }
 ];
 
-export default function SocialProofMarquee() {
+const ACADEMY_CAPABILITIES = [
+  {
+    title: 'HTML5 & Tailwind CSS',
+    tag: 'Frontend',
+    desc: 'Build responsive, clean layouts from scratch.',
+    metric: 'UI Basics',
+    icon: Layout
+  },
+  {
+    title: 'JavaScript ES6+',
+    tag: 'Core Logic',
+    desc: 'DOM, async programming, and real problem solving.',
+    metric: 'Hands-On',
+    icon: Palette
+  },
+  {
+    title: 'React 18 & Hooks',
+    tag: 'Frontend Pro',
+    desc: 'Component architecture and modern state management.',
+    metric: 'Live Apps',
+    icon: Zap
+  },
+  {
+    title: 'MERN Full Stack',
+    tag: 'Backend + DB',
+    desc: 'Node.js, Express APIs, and MongoDB database.',
+    metric: 'End-to-End',
+    icon: Rocket
+  },
+  {
+    title: 'Python Programming',
+    tag: 'Versatile',
+    desc: 'Clean Python syntax, scripting, and backend logic.',
+    metric: 'Beginner Ready',
+    icon: Search
+  },
+  {
+    title: 'Generative AI Apps',
+    tag: 'AI Skills',
+    desc: 'Build smart tools using LLMs and prompt workflows.',
+    metric: 'Future Ready',
+    icon: MessageCircle
+  }
+];
+
+export default function SocialProofMarquee({ siteMode = 'studio' }) {
+  const items = siteMode === 'academy' ? ACADEMY_CAPABILITIES : TECH_CAPABILITIES;
+
   return (
-    <section className="py-10 md:py-12 bg-zinc-50 dark:bg-zinc-900 border-y border-zinc-200/80 dark:border-zinc-800 relative overflow-hidden select-none transition-colors duration-300">
+    <section className="py-7 sm:py-12 bg-zinc-50 dark:bg-zinc-900 border-y border-zinc-200/80 dark:border-zinc-800 relative overflow-hidden select-none transition-colors duration-300">
       <div className="w-full overflow-hidden">
         <div
-          className="flex gap-6 w-max animate-marquee hover:[animation-play-state:paused]"
+          className="flex gap-4 sm:gap-6 w-max animate-marquee hover:[animation-play-state:paused]"
           style={{ animationDuration: '18s' }}
         >
-          {[...TECH_CAPABILITIES, ...TECH_CAPABILITIES].map((item, idx) => {
+          {[...items, ...items].map((item, idx) => {
             const Icon = item.icon;
             return (
               <div
                 key={`${item.title}-${idx}`}
-                className="run-border-card w-60 h-60 shrink-0 p-5 rounded-2xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 shadow-xs transition-colors flex flex-col justify-between group"
+                className="run-border-card w-52 h-44 sm:w-60 sm:h-60 shrink-0 p-4 sm:p-5 rounded-2xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 shadow-xs transition-colors flex flex-col justify-between group"
               >
                 <RunningBorder />
                 <div className="flex items-center justify-between">

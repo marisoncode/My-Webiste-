@@ -1,39 +1,28 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 import { testimonials } from '../data/testimonialsData';
-import { Star, ChevronLeft, ChevronRight, Quote, Sparkles, CheckCircle } from 'lucide-react';
+import { academyReviews } from '../data/academyData';
+import { Star, Quote, Sparkles, CheckCircle } from 'lucide-react';
 import RunningBorder from './RunningBorder';
-import { soundFx } from '../utils/soundEffects';
 
-export default function TestimonialsSection() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const prev = () => {
-    soundFx.playPop();
-    setCurrentIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
-  };
-
-  const next = () => {
-    soundFx.playPop();
-    setCurrentIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
-  };
-
-  const current = testimonials[currentIndex];
+export default function TestimonialsSection({ siteMode = 'studio' }) {
+  const isAcademy = siteMode === 'academy';
+  const featured = (isAcademy ? academyReviews : testimonials).slice(0, 3);
 
   return (
-    <section id="testimonials" className="py-24 md:py-32 relative bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 overflow-hidden select-none border-y border-zinc-200/80 dark:border-zinc-800 transition-colors duration-300">
-      <div className="max-w-[1536px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-20 relative z-10">
+    <section id="testimonials" className="py-10 sm:py-14 md:py-16 relative bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 overflow-hidden select-none border-y border-zinc-200/80 dark:border-zinc-800 transition-colors duration-300">
+      <div className="max-w-[1536px] mx-auto px-4 sm:px-10 lg:px-14 xl:px-20 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-teal-800 dark:text-teal-300 text-xs font-bold uppercase tracking-wider mb-4 shadow-xs"
           >
-            <Sparkles className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" />
-            Testimonials
+            <Sparkles className="w-3.5 h-3.5 text-[#25A727]" />
+            Client Reviews
           </motion.div>
 
           <motion.h2
@@ -43,9 +32,9 @@ export default function TestimonialsSection() {
             transition={{ delay: 0.1 }}
             className="text-3xl sm:text-4xl md:text-5xl font-black text-zinc-950 dark:text-white tracking-tight leading-[1.15] font-display"
           >
-            Good Words. <br />
-            <span className="text-teal-600 dark:text-teal-400">
-              Great Partnerships.
+            Trusted by Businesses. <br />
+            <span className="text-[#19A12B]">
+              Built for Real Growth.
             </span>
           </motion.h2>
 
@@ -54,95 +43,71 @@ export default function TestimonialsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="mt-4 text-base sm:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed font-normal"
+            className="mt-3 sm:mt-4 text-sm sm:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed font-normal"
           >
-            Here is what verified founders and businesses say about working with MJ Web Design Studio. Handcrafted from ₹999.
+            {isAcademy
+              ? 'Verified feedback from students learning Frontend, Python, React, MERN Stack, and Generative AI online.'
+              : <>Verified feedback from business owners who launched their websites, SEO, and Google Business Profiles with <span className="font-bold text-[#07292B] dark:text-[#25A727]">helloworldstudio.in</span>.</>}
           </motion.p>
         </div>
 
-        {/* Featured Square Testimonial Spotlight */}
-        <div className="max-w-xl mx-auto">
-          <div className="run-border-card relative sm:aspect-square rounded-2xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-7 sm:p-10 shadow-sm overflow-hidden flex flex-col justify-between">
-            <RunningBorder />
-            <Quote className="absolute -top-4 -right-4 w-28 h-28 text-zinc-100 dark:text-zinc-900 pointer-events-none" />
+        {/* 3-Column Bento Review Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-7 max-w-6xl mx-auto">
+          {featured.map((item, idx) => (
+            <motion.div
+              key={`${item.name}-${idx}`}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: idx * 0.08 }}
+              className="run-border-card rounded-2xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-6 sm:p-7 shadow-sm hover:shadow-md transition-all flex flex-col justify-between relative overflow-hidden group"
+            >
+              <RunningBorder />
+              <Quote className="absolute top-4 right-4 w-10 h-10 text-zinc-100 dark:text-zinc-900 pointer-events-none" />
 
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={current.id}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.3 }}
-                className="flex flex-col justify-between h-full relative z-10"
-              >
-                <div>
-                  {/* Star rating */}
-                  <div className="flex items-center gap-1 mb-5">
-                    {[...Array(current.rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
+              <div>
+                {/* Rating & Tag */}
+                <div className="flex items-center justify-between gap-2 mb-4 relative z-10">
+                  <div className="flex items-center gap-0.5">
+                    {[...Array(item.rating)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-[#25A727] text-[#25A727]" />
                     ))}
-                    <span className="ml-2 text-xs font-bold text-amber-700">
-                      5.0 Verified Review
-                    </span>
                   </div>
-
-                  {/* Key Highlight Quote */}
-                  <h3 className="text-xl sm:text-2xl font-black text-zinc-950 dark:text-white mb-4 font-display">
-                    "{current.highlight}"
-                  </h3>
-
-                  {/* Full Quote text */}
-                  <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed italic font-normal">
-                    "{current.quote}"
-                  </p>
+                  <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-teal-50 dark:bg-[#07292B] text-[#07292B] dark:text-[#25A727] border border-teal-200 dark:border-[#0d4a4c]">
+                    5.0 Verified
+                  </span>
                 </div>
 
-                {/* Author Info & Nav Buttons */}
-                <div className="pt-5 border-t border-zinc-100 dark:border-zinc-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-6">
-                  <div className="flex items-center gap-4">
-                    <img
-                      src={current.avatar}
-                      alt={current.name}
-                      className="w-14 h-14 rounded-full object-cover border-2 border-teal-500 shadow-xs"
-                    />
-                    <div>
-                      <div className="text-base font-bold text-zinc-950 dark:text-white flex items-center gap-2 font-display">
-                        <span>{current.name}</span>
-                        <CheckCircle className="w-4 h-4 text-teal-600 dark:text-teal-400" />
-                      </div>
-                      <div className="text-xs text-zinc-500 dark:text-zinc-400">
-                        {current.role} • <span className="text-teal-700 dark:text-teal-400 font-bold">{current.company}</span>
-                      </div>
-                      <div className="text-[11px] text-zinc-500 mt-0.5">
-                        Delivered: {current.projectType}
-                      </div>
-                    </div>
-                  </div>
+                {/* Highlight Quote */}
+                <h3 className="text-base sm:text-lg font-black text-zinc-950 dark:text-white font-display mb-2.5 leading-snug relative z-10">
+                  "{item.highlight}"
+                </h3>
 
-                  {/* Navigation arrows */}
-                  <div className="flex items-center gap-2 self-end sm:self-center">
-                    <button
-                      onClick={prev}
-                      className="p-2.5 rounded-full bg-zinc-100 border border-zinc-200 hover:bg-teal-600 hover:border-teal-600 text-zinc-700 hover:text-white transition-all shadow-xs"
-                      aria-label="Previous testimonial"
-                    >
-                      <ChevronLeft className="w-5 h-5" />
-                    </button>
-                    <span className="text-xs text-zinc-500 font-mono font-bold px-2">
-                      {currentIndex + 1} / {testimonials.length}
-                    </span>
-                    <button
-                      onClick={next}
-                      className="p-2.5 rounded-full bg-zinc-100 border border-zinc-200 hover:bg-teal-600 hover:border-teal-600 text-zinc-700 hover:text-white transition-all shadow-xs"
-                      aria-label="Next testimonial"
-                    >
-                      <ChevronRight className="w-5 h-5" />
-                    </button>
+                {/* Quote Body */}
+                <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-5 relative z-10">
+                  "{item.quote}"
+                </p>
+              </div>
+
+              {/* Author Row */}
+              <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800 flex items-center gap-3 relative z-10 mt-auto">
+                <img
+                  src={item.avatar}
+                  alt={item.name}
+                  className="w-11 h-11 rounded-full object-cover border-2 border-[#25A727] shrink-0"
+                />
+                <div className="min-w-0">
+                  <div className="text-sm font-bold text-zinc-950 dark:text-white flex items-center gap-1.5 font-display truncate">
+                    <span className="truncate">{item.name}</span>
+                    <CheckCircle className="w-3.5 h-3.5 text-[#25A727] shrink-0" />
+                  </div>
+                  <div className="text-[11px] text-zinc-500 dark:text-zinc-400 truncate">
+                    {item.role} • <span className="font-bold text-[#07292B] dark:text-[#25A727]">{item.company}</span>
                   </div>
                 </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
 
       </div>

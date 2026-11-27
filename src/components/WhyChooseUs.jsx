@@ -59,7 +59,7 @@ export default function WhyChooseUs() {
             className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-teal-800 dark:text-teal-300 text-xs sm:text-sm font-bold uppercase tracking-wider mb-5 shadow-xs"
           >
             <Sparkles className="w-4 h-4 text-teal-600 dark:text-teal-400" />
-            Why Choose MJ Web Design Studio? ✦
+            Why Choose Hello World Studio? ✦
           </motion.div>
 
           <motion.h2
@@ -70,7 +70,7 @@ export default function WhyChooseUs() {
             className="text-4xl sm:text-5xl lg:text-6xl font-black text-zinc-950 dark:text-white tracking-tight leading-[1.12] font-display"
           >
             Digital Solutions Designed to <br />
-            <span className="text-teal-600 dark:text-teal-400">
+            <span className="text-[#19A12B]">
               Make an Impact.
             </span>
           </motion.h2>

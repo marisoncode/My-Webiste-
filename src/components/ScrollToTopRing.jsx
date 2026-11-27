@@ -55,7 +55,7 @@ export default function ScrollToTopRing() {
           cy="28"
           r={radius}
           fill="none"
-          stroke="#0d9488"
+          stroke="#25A727"
           strokeWidth="3.5"
           strokeLinecap="round"
           strokeDasharray={circumference}

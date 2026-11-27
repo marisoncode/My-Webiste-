@@ -50,7 +50,7 @@ export default function FaqSection({ onBackHome, onContact }) {
             className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-zinc-950 tracking-tight font-display"
           >
             Everything You Need to Know <br />
-            <span className="text-teal-600">Before Starting Your Project</span>
+            <span className="text-[#19A12B]">Before Starting Your Project</span>
           </motion.h2>
 
           <motion.p

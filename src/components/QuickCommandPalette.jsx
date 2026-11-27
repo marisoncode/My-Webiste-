@@ -38,11 +38,6 @@ export default function QuickCommandPalette({ isOpen, onClose, darkMode, onToggl
       action: () => { onNavigate('home', '#services'); onClose(); }
     },
     {
-      label: 'Go to Why Choose Us (Impact Cards)',
-      tag: 'Section',
-      action: () => { onNavigate('home', '#why-us'); onClose(); }
-    },
-    {
       label: 'Go to 4-Step Process',
       tag: 'Section',
       action: () => { onNavigate('home', '#process'); onClose(); }
